@@ -8,7 +8,6 @@ bolt
 brltty
 broadcom-wl
 btrfs-progs
-clonezilla
 cryptsetup
 darkhttpd
 ddrescue
@@ -72,6 +71,7 @@ smartmontools
 sof-firmware
 squashfs-tools
 sudo
+syslinux
 systemd-resolvconf
 tcpdump
 terminus-font
