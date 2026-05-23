@@ -1,0 +1,52 @@
+name: Autorelease ISO each month
+
+on:
+  push:
+    tags:
+      - 'v*'
+  schedule:
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+      options: --privileged
+
+    steps:
+      - name: Get source code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: pacman -Syu --noconfirm && pacman -S archiso arch-install-scripts github-cli --noconfirm
+  
+      - name: Create version tag
+        id: prep
+        run: |
+          if [[ "${{ github.ref_type }}" == "tag" ]]; then
+            echo "TAG_NAME=${{ github.ref_name }}" >> $GITHUB_ENV
+          else
+            echo "TAG_NAME=v$(date +'%Y.%m.%d')" >> $GITHUB_ENV
+          fi
+
+      - name: Build ISO
+        run: |
+          mkdir -p /tmp/iso-output
+          mkarchiso -v -w /tmp/archiso-workspace -o /tmp/iso-output .
+          echo "ISO_PATH=$(ls /tmp/iso-output/*.iso)" >> $GITHUB_ENV
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run:
+          gh release create "${{ env.TAG_NAME }}" \
+            --title "mp2arch Build (${{ env.TAG_NAME }})" \
+            --notes "Updated packages to their last version." \
+            "${{ env.ISO_PATH }}"
+        
+  
