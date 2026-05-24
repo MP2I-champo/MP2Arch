@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+set -e
+source "$1"
+
+while true; do
+  read -r -p "Do you want to continue, the following operation will erase your disk in order to set up new partitions (y/n): " ERASE_DISK
+  if [[ "$ERASE_DISK" = "y" ]]; then
+    sgdisk -Z "${TARGET_DISK}"
+    break
+  elif [[ "$ERASE_DISK" = "n" ]]; then
+    echo "Exiting."
+    exit 1
+  else
+    echo "INVALID: invalid, type y or n."
+  fi
+done
+
+echo "Creating EFI partition of 512MB..."
+sgdisk -n 1:0:+512M -t 1:ef00 -c 1:"EFI System Partition" "${TARGET_DISK}"
+
+RAM_KB=$(grep MemTotal /proc/meminfo | awk '{print $2}')
+RAM_GB=$(( RAM_KB / 1024 / 1024))
+
+if [[ -z "$RAM_GB" || "$RAM_GB" -le  0 ]]; then
+  RAM_GB=4
+fi
+
+echo "Detected ${RAM_GB} GB of RAM, mirroring size for swap..."
+sgdisk -n 2:0:"+${RAM_GB}G" -t 2:8200 -c 2:"Linux Swap" "${TARGET_DISK}"
+
+DISK_NAME=$(basename "$TARGET_DISK")
+TOTAL_SECTORS=$(cat "/sys/class/block/${DISK_NAME}/size")
+DISK_SIZE_GB=$(( TOTAL_SECTORS / 2 / 1024 / 1024 ))
+
+SUPPOSED_FREE_SPACE=$(( DISK_SIZE_GB - RAM_GB - 1))
+
+echo "You have a ${DISK_SIZE_GB} GB disk, ${RAM_GB} are used for swap and 512M for EFI partition, leaving ${SUPPOSED_FREE_SPACE} if you had nothing on the disk before."
+
+while true; do
+  read -r -p "System files partition size (in GB, 50-100GB recommended, min 10): " SLASH_SIZE
+  if [[ -z "$SLASH_SIZE" ]]; then
+    echo "INVALID: invalid, cannot be empty."
+  elif [[ ! "$SLASH_SIZE" =~ ^[0-9]+$ ]]; then
+    echo "INVALID: Please enter a whole number without units (e.g., 50)."
+  elif [[ "$SLASH_SIZE" -lt 10 ]]; then
+    echo "INVALID: size too low."
+  elif [[ "$SLASH_SIZE" -gt "$SUPPOSED_FREE_SPACE" ]]; then
+    echo "INVALID: too large! On this ${DISK_SIZE_GB} GB drive, the maximum available for root is $SUPPOSED_FREE_SPACE GB (leaving room for EFI and Swap)."
+  else
+    break
+  fi
+done
+
+echo "Creating Linux Root Partition (${SLASH_SIZE} GB)..."
+sgdisk -n 3:0:"+${SLASH_SIZE}G" -t 3:8304 -c 3:"Linux Root" "${TARGET_DISK}"
+
+echo "Creating Home partition with the leaving space (user files)..."
+sgdisk -n 4:0:0 -t 4:8302 -c 4:"Linux Home" "${TARGET_DISK}"
+
+echo "Reloading partition tables..."
+partprobe "${TARGET_DISK}"
+udevadm settle
+
+echo "Partition creation finished."

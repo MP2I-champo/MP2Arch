@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "Available storages:"
+lsblk -o NAME,SIZE,TYPE,MOUNTPOINTS
+
+while true; do
+  read -r -p "Target disk (ex : /dev/sda or /dev/nvme0n1) : " TARGET_DISK
+  if [[ -z "$TARGET_DISK" ]]; then
+    echo "INVALID: disk path cannot be empty."
+  elif [[ ! -b "$TARGET_DISK" ]]; then
+    echo "ERROR: disk $TARGET_DISK not found."
+  else
+    break
+  fi
+done
+
+while true; do
+  read -r -p "Hostname: " TARGET_HOSTNAME
+  if [[ -z "$TARGET_HOSTNAME" ]]; then
+    echo "INVALID: hostname cannot be empty;"
+  else
+    break
+  fi
+done
+
+while true; do
+  read -r -p "Username: " TARGET_USERNAME
+  if [[ -z "$TARGET_USERNAME" ]]; then
+    echo "INVALID: username cannot be empty."
+  else
+    break
+  fi
+done
+
+while true; do
+  read -r -s -p "Enter password for $TARGET_USERNAME: " USER_PASSWORD
+  echo
+  read -r -s -p "Confirm password for $TARGET_USERNAME: " USER_PASSWORD_CONFIRM
+  echo
+  if [[ -z "$USER_PASSWORD" ]]; then
+    echo "INVALID: password cannot be empty."
+  elif [[ ! "$USER_PASSWORD" = "$USER_PASSWORD_CONFIRM" ]]; then
+    echo "INVALID: passwords do not match."
+  else
+    break
+  fi
+done
+
+while true; do
+  read -r -s -p "Enter password for root: " ROOT_PASSWORD
+  echo
+  read -r -s -p "Confirm password for root: " ROOT_PASSWORD_CONFIRM
+  echo
+  if [[ -z "$ROOT_PASSWORD" ]]; then
+    echo "INVALID: password cannot be empty."
+  elif [[ ! "$ROOT_PASSWORD" = "$ROOT_PASSWORD_CONFIRM" ]]; then
+    echo "INVALID: passwords do not match."
+  else
+    break
+  fi
+done
+
+if [[ "${TARGET_DISK}" == *[0-9] ]]; then
+  PART_SUFFIX="p"
+else
+  PART_SUFFIX=""
+fi
+
+
+CONFIG_FILE="/tmp/mp2i-config.env"
+cat <<EOF > "$CONFIG_FILE"
+TARGET_DISK="$TARGET_DISK"
+EFI_PART="${TARGET_DISK}${PART_SUFFIX}1"
+SWAP_PART="${TARGET_DISK}${PART_SUFFIX}2"
+ROOT_PART="${TARGET_DISK}${PART_SUFFIX}3"
+HOME_PART="${TARGET_DISK}${PART_SUFFIX}4"
+TARGET_HOSTNAME="$TARGET_HOSTNAME"
+TARGET_USERNAME="$TARGET_USERNAME"
+USER_PASSWORD="$USER_PASSWORD"
+ROOT_PASSWORD="$ROOT_PASSWORD"
+EOF
+
+echo -e "\nBase params set. Syncing clock and calling subscripts to continue installation."
+timedatectl set-ntp true
+
+mp2i-partition "$CONFIG_FILE"
+mp2i-base "$CONFIG_FILE"
+
+mkdir -p /mnt/root
+
+cp "$CONFIG_FILE" /mnt/root/mp2i-config.env
+cp /usr/local/bin/mp2i-chroot /mnt/root/mp2i-chroot
+
+chmod +x /mnt/root/mp2i-chroot
+
+echo "Entering chroot system..."
+arch-chroot /mnt /root/mp2i-chroot
+
+echo "Cleaning installation scripts."
+
+rm -f /mnt/root/mp2i-config.env
+rm -f /mnt/root/mp2i-chroot
+
+echo "Installation completed."

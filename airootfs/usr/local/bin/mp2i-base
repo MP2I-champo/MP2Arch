@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -e
+source "$1"
+
+echo "Initializing EFI part (FAT 32)..."
+mkfs.fat -F32 "${EFI_PART}"
+
+echo "Initializing Swap part..."
+mkswap "${SWAP_PART}"
+
+echo "Initializing root part (ext4)..."
+mkfs.ext4 -F  "${ROOT_PART}"
+
+echo "Initializing home part (ext4)..."
+mkfs.ext4 -F  "${HOME_PART}"
+
+echo "Mounting filesystem..."
+mount "${ROOT_PART}" /mnt
+
+mount --mkdir "${EFI_PART}" /mnt/boot
+mount --mkdir "${HOME_PART}" /mnt/home
+
+swapon "${SWAP_PART}"
+
+echo "Bootsrapping in newly created env..."
+
+pacstrap -K /mnt base linux linux-firmware vim grub efibootmgr iwd sudo zsh
+
+echo "Creating permanent fstab..."
+genfstab -U /mnt >> /mnt/etc/fstab

@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+source "$1"
+
+ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
+hwclock --systohc
+
+echo "Addind en_US lang to the system..."
+echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+locale-gen
+
+while true; do
+  read -r -p "Load french keyboard (AZERTY) (y/n): " FRENCH_KEYBOARD
+  if [[ "$FRENCH_KEYBOARD" = "y" ]]; then
+    echo "KEYMAP=fr" > /etc/vconsole.conf
+    echo "Keys config saved."
+    break
+  elif [[ "$FRENCH_KEYBOARD" = "n" ]]; then
+    echo "Skipped loading french keyboard."
+  else
+    echo "INVALID: invalid, type y or n."
+  fi
+done
+
+echo "Assigning hostname..."
+echo "${TARGET_HOSTNAME}" > /etc/hostname
+
+echo "Initializing initramfs"
+mkinitcpio -P
+
+echo "Creating root and user credentials..."
+echo "root:${ROOT_PASSWORD}" | chpasswd
+
+useradd -m -G wheel -s /usr/bin/zsh "${TARGET_USERNAME}"
+echo "${TARGET_USERNAME}:${USER_PASSWORD}" | chpasswd
+
+sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
+
+echo "Initializing network modules (because having internet may be useful (:)..."
+mkdir -p /etc/systemd/network
+
+cat <<EOF > /etc/systemd/network/20-wire-and-wireless.network
+[Match]
+Name=en* wl*
+
+[Network]
+DHCP=yes
+EOF
+
+mkdir -p /etc/iwd
+cat <<EOF > /etc/iwd/main.conf
+[General]
+EnableNetworkConfiguration=false
+EOF
+
+ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+
+systemctl enable iwd
+systemctl enable systemd-networkd
+systemctl enable systemd-resolved
+
+echo "Initializing GRUB..."
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+grub-mkconfig -o /boot/grub/grub.cfg
+
+echo "Chroot process finished successfully!"
