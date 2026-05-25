@@ -6,5 +6,5 @@ For mobile broadband (WWAN) modems, connect with the [35mmmcli[0m utility.
 Ethernet, WLAN and WWAN interfaces using DHCP should work automatically.
 
 Type `loadkeys fr` to switch to a french (azerty) keyboard.
-
+Type `mp2i-install` to trigger the automatic installation script (internet connection needed, use either ethernet or `iwctl` to connect to wifi).
 Enjoy!

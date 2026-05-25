@@ -23,8 +23,10 @@ mount --mkdir "${HOME_PART}" /mnt/home
 
 swapon "${SWAP_PART}"
 
-echo "Bootsrapping in newly created env..."
+echo "Updating mirror list..."
+reflector --country 'France,Germany' --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
+echo "Bootsrapping in newly created env..."
 pacstrap -K /mnt base linux linux-firmware vim grub efibootmgr iwd sudo zsh
 
 echo "Creating permanent fstab..."
