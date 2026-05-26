@@ -4,7 +4,7 @@ set -e
 source "$1"
 
 while true; do
-  read -r -p "Do you want to continue, the following operation will erase your disk in order to set up new partitions (y/n): " ERASE_DISK
+  read -r -p "Do you want to continue ? The following operation will erase your disk in order to set up new partitions (y/n): " ERASE_DISK
   if [[ "$ERASE_DISK" = "y" ]]; then
     sgdisk -Z "${TARGET_DISK}"
     break
@@ -20,7 +20,7 @@ echo "Creating EFI partition of 512MB..."
 sgdisk -n 1:0:+512M -t 1:ef00 -c 1:"EFI System Partition" "${TARGET_DISK}"
 
 RAM_KB=$(grep MemTotal /proc/meminfo | awk '{print $2}')
-RAM_GB=$(( RAM_KB / 1024 / 1024))
+RAM_GB=$(( (RAM_KB / 1024 / 1024) + 1 ))
 
 if [[ -z "$RAM_GB" || "$RAM_GB" -le  0 ]]; then
   RAM_GB=4
@@ -35,7 +35,7 @@ DISK_SIZE_GB=$(( TOTAL_SECTORS / 2 / 1024 / 1024 ))
 
 SUPPOSED_FREE_SPACE=$(( DISK_SIZE_GB - RAM_GB - 1))
 
-echo "You have a ${DISK_SIZE_GB} GB disk, ${RAM_GB} are used for swap and 512M for EFI partition, leaving ${SUPPOSED_FREE_SPACE} if you had nothing on the disk before."
+echo "You have a ${DISK_SIZE_GB} GB disk, ${RAM_GB} GB are used for swap and 512M for EFI partition, leaving ${SUPPOSED_FREE_SPACE} GB of free space."
 
 while true; do
   read -r -p "System files partition size (in GB, 50-100GB recommended, min 10): " SLASH_SIZE
@@ -55,7 +55,8 @@ done
 echo "Creating Linux Root Partition (${SLASH_SIZE} GB)..."
 sgdisk -n 3:0:"+${SLASH_SIZE}G" -t 3:8304 -c 3:"Linux Root" "${TARGET_DISK}"
 
-echo "Creating Home partition with the leaving space (user files)..."
+FREE_SPACE=$((SUPPOSED_FREE_SPACE - SLASH_SIZE))
+echo "Creating Home partition (user files) with the leaving space ($FREE_SPACE)..."
 sgdisk -n 4:0:0 -t 4:8302 -c 4:"Linux Home" "${TARGET_DISK}"
 
 echo "Reloading partition tables..."

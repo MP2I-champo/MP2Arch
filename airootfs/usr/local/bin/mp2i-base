@@ -23,7 +23,7 @@ mount --mkdir "${HOME_PART}" /mnt/home
 
 swapon "${SWAP_PART}"
 
-echo "Updating mirror list..."
+echo "Updating mirror list... (may take time)"
 reflector --country 'France,Germany' --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
 echo "Bootsrapping in newly created env..."
