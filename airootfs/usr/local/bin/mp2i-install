@@ -92,7 +92,6 @@ mkdir -p /mnt/root
 
 cp "$CONFIG_FILE" /mnt/root/mp2i-config.env
 cp /usr/local/bin/mp2i-chroot /mnt/root/mp2i-chroot
-cp /etc/pacman.conf /mnt/etc/pacman.conf
 
 chmod +x /mnt/root/mp2i-chroot
 

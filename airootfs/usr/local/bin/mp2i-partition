@@ -56,7 +56,7 @@ echo "Creating Linux Root Partition (${SLASH_SIZE} GB)..."
 sgdisk -n 3:0:"+${SLASH_SIZE}G" -t 3:8304 -c 3:"Linux Root" "${TARGET_DISK}"
 
 FREE_SPACE=$((SUPPOSED_FREE_SPACE - SLASH_SIZE))
-echo "Creating Home partition (user files) with the leaving space ($FREE_SPACE)..."
+echo "Creating Home partition (user files) with the leaving space ($FREE_SPACE GB)..."
 sgdisk -n 4:0:0 -t 4:8302 -c 4:"Linux Home" "${TARGET_DISK}"
 
 echo "Reloading partition tables..."
