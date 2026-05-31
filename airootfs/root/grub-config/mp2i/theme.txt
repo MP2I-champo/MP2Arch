@@ -1,0 +1,65 @@
+desktop-image: "background.png"
+title-text: ""
+title-font: "Term Regular 14"
+title-color: "#c0caf5"
+message-font: "Term Regular 14"
+message-color: "#c0caf5"
+message-bg-color: "#1a1b26"
+desktop-color: "#000000"
+
+terminal-left: "59%"
+terminal-top: "30%"
+terminal-width: "40%"
+terminal-height: "60%"
+terminal-border: "0"
+terminal-font: "Term Regular 14"
+
++ boot_menu {
+        left = 2%          
+        top = 40%         
+        width = 450
+        height = 124     
+        item_font = "Fira Code Regular 14"
+        selected_item_font = "Fira Code Regular 16"
+        item_color = "#9aa5ce"
+        selected_item_color = "#7dcfff"
+        item_height = 38
+        item_padding = 15
+        item_spacing = 5
+        icon_width = 32
+        icon_height = 32
+        item_icon_space = 20
+        selected_item_pixmap_style= "select_bkg_*.png"
+        menu_pixmap_style = "menu_bkg_*.png"
+}
+
++ label {
+        color = "#565f89"
+        font = "Fira Code Regular 14"
+        left = 5%
+        top = 95%
+        width = 50%
+        align = "left"
+        text = "C: Console | E: Edit"
+}
+
++ label {
+        color = "#c0caf5"
+        font = "Fira Code Regular 14"
+        left = 85%+1
+        top = 95%
+        width = 100%
+        align = "left"
+        text = "Booting in"
+}
+
++ label {
+        color = "#ff9e64"
+        font = "Fira Code Regular 16"
+        left = 85%+112
+        top = 95%
+        width = 100%
+        align = "left"
+        id = "__timeout__"
+        text = "%d"
+}

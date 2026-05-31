@@ -59,6 +59,19 @@ systemctl enable iwd
 systemctl enable systemd-networkd
 systemctl enable systemd-resolved
 
+while true; do
+  read -r -p "Install pre-configurated Desktop Environment ? (recommended, if not only a simple terminal will be installed) (y/n): " CUSTOM_DE
+  if [[ "$CUSTOM_DE" = "y" ]]; then
+    /root/custom-config "$TARGET_USERNAME"
+    echo "Custom Desktop Environment configured."
+    break
+  elif [[ "$CUSTOM_DE" = "n" ]]; then
+    echo "Skipped configuring Desktop Environment."
+  else
+    echo "INVALID: invalid, type y or n."
+  fi
+done
+
 echo "Initializing GRUB..."
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg

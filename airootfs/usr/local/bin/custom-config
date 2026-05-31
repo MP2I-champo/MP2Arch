@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+USER_NAME=$1
+
+echo "Installing some things..."
+pacman -S --noconfirm hyprland hyprshot hyprpolkitagent cage \
+  xdg-desktop-portal-hyprland xorg-xwayland qt6-wayland qt5-wayland \
+  quickshell fuzzel wpaperd matugen starship alacritty fastfetch \
+  pipewire wireplumber pipewire-audio pipewire-pulse pipewire-jack wiremix \
+  bluez bluez-utils bluetui impala \
+  brightnessctl \
+  greetd greetd-regreet \
+  thunar gvfs \
+  btop \
+  firefox helix \
+  zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search \
+  ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji
+
+echo "Setting up greetd"
+mkdir -p /etc/greetd/
+cat << 'EOF' > /etc/greetd/config.toml
+[terminal]
+vt = 1
+
+[default_session]
+command = "dbus-run-session cage -s -d -- regreet"
+user = "greeter"
+EOF
+
+cat << 'EOF' > /etc/greetd/regreet.toml
+[background]
+path = "/usr/share/backgrounds/login-screen.jpg"
+fit = "Cover"
+
+[GTK]
+font_name = "Noto Sans 10"
+application_prefer_dark_theme= true
+
+[commands]
+reboot = ["systemctl", "reboot"]
+poweroff = ["systemctl", "poweroff"]
+EOF
+
+chmod 755 /etc/greetd
+chmod 644 /etc/greetd/config.toml /etc/greetd/hyprland.lua /etc/greetd/regreet.toml
+chmod 644 /usr/share/backgrounds/login-screen.jpg
+
+systemctl enable greetd.service
+systemctl enable bluetooth.service
+
+echo "Moving user config into the right dir..."
+mkdir -p /home/"$USER_NAME"/.config
+cp -r /root/.config/. /home/"$USER_NAME"/.config/
+cp /root/zshrc /home/"$USER_NAME"/.zshrc
+
+mkdir -p /home/"$USER_NAME"/wallpapers
+cp -r /root/wallpapers/. /home/"$USER_NAME"/wallpapers/
+
+sed -i "s|TARGET_HOME|/home/$USER_NAME|g" /home/"$USER_NAME"/.config/wpaperd/config.toml
+
+echo "Granting permissions on file to $USER_NAME"
+
+chown -R "$USER_NAME":"$USER_NAME" /home/"$USER_NAME"/
+chmod +x /home/"$USER_NAME"/.config/wpaperd/matugen-hook.sh
+
+sudo -u "$USER_NAME" fc-cache -fv
+sudo -u "$USER_NAME" matugen image /home/"$USER_NAME"/wallpapers/2.jpg
+
+echo "Setting up grub theme..."
+mkdir -p /boot/grub/themes/mp2i
+cp /root/grub-config/grub /etc/default/
+cp -r /root/grub-config/mp2i/. /boot/grub/themes/mp2i/

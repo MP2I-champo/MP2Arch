@@ -1,0 +1,13 @@
+theme = "catppuccin_transparent"
+
+[editor]
+line-number = "relative"
+cursorline = true
+color-modes = true
+idle-timeout = 50
+auto-completion = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"

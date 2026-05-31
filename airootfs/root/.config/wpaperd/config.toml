@@ -1,0 +1,8 @@
+[default]
+duration = "30m"
+mode = "fit"
+sorting = "random"
+exec = "TARGET_HOME/.config/wpaperd/matugen-hook.sh"
+
+[any]
+path = "TARGET_HOME/wallpapers"

@@ -1,0 +1,59 @@
+[window]
+opacity = 0.80
+decorations = "none"
+startup_mode = "Windowed"
+dynamic_padding = true
+padding = { x = 12, y = 12 }
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+size = 10.0
+
+[cursor]
+style = { shape = "Beam", blinking = "On" }
+
+[colors.cursor]
+cursor = "{{colors.primary.default.hex}}"
+text = "{{colors.background.default.hex}}"
+
+[colors.primary]
+background = "{{colors.background.default.hex}}"
+foreground = "{{colors.on_background.default.hex}}"
+
+[colors.normal]
+black   = "{{colors.surface.default.hex}}"
+red     = "{{colors.error.default.hex}}"
+green   = "{{colors.primary.default.hex}}"
+yellow  = "{{colors.tertiary.default.hex}}"
+blue    = "{{colors.secondary.default.hex}}"
+magenta = "{{colors.inverse_primary.default.hex}}"
+cyan    = "{{colors.primary_container.default.hex}}"
+white   = "{{colors.on_surface_variant.default.hex}}"
+
+[colors.bright]
+black   = "{{colors.surface_bright.default.hex}}"
+red     = "{{colors.error_container.default.hex}}"
+green   = "{{colors.primary.default.hex}}"
+yellow  = "{{colors.tertiary_container.default.hex}}"
+blue    = "{{colors.secondary_container.default.hex}}"
+magenta = "{{colors.outline.default.hex}}"
+cyan    = "{{colors.on_primary_container.default.hex}}"
+white   = "{{colors.on_background.default.hex}}"
+
+[terminal.shell]
+program = "/bin/zsh"
+
+[env]
+TERM = "alacritty"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
+
+[general]
+live_config_reload = true
