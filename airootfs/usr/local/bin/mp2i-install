@@ -100,8 +100,8 @@ cp /root/login-screen.jpg /mnt/usr/share/backgrounds/login-screen.jpg
 mkdir -p /mnt/root/wallpapers
 cp -r /root/wallpapers/. /mnt/root/wallpapers/
 
-mkdir -p /mnt/root/.config
-cp -r /root/.config/. /mnt/root/.config/
+mkdir -p /mnt/root/config
+cp -r /root/config/. /mnt/root/config/
 
 mkdir -p /mnt/root/grub-config
 cp -r /root/grub-config/. /mnt/root/grub-config/
@@ -119,7 +119,7 @@ rm -f /mnt/root/zshrc
 rm -f /mnt/root/mp2i-config.env
 rm -f /mnt/root/mp2i-chroot
 rm -f /mnt/root/custom-config
-rm -rf /mnt/root/.config
+rm -rf /mnt/root/config
 rm -rf /mnt/root/grub-config
 rm -rf /mnt/root/wallpapers
 
