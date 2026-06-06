@@ -159,7 +159,8 @@ systemctl enable bluetooth.service
 
 echo "Installing paru..."
 git clone https://aur.archlinux.org/paru.git
-(cd paru && makepkg -si)
+chown -R "$USER_NAME":"$USER_NAME" paru
+(cd paru && sudo -u "$USER_NAME" makepkg -si --noconfirm)
 rm -rf paru
 
 echo "Moving user config into the right dir..."
