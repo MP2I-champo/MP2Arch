@@ -4,6 +4,7 @@ source "$1"
 
 ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
 hwclock --systohc
+timedatectl set-ntp true
 
 echo "Addind en_US lang to the system..."
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
