@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Bluetui
+GenericName=Bluetui
+Comment=Configure bluetooth settings
+Exec=alacritty -e bluetui
+Type=Application
+Icon=/usr/share/icons/Adwaita/symbolic/devices/bluetooth-symbolic.svg
+StartupNotify=false

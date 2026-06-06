@@ -165,6 +165,10 @@ rm -rf paru
 echo "Moving user config into the right dir..."
 mkdir -p /home/"$USER_NAME"/.config
 cp -r /root/config/. /home/"$USER_NAME"/.config/
+
+mkdir -p /home/"$USER_NAME"/.local
+cp -r /root/local/. /home/"$USER_NAME"/.local/
+
 cp /root/zshrc /home/"$USER_NAME"/.zshrc
 
 mkdir -p /home/"$USER_NAME"/wallpapers

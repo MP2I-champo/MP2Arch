@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Impala (wifi)
+GenericName=Impala
+Comment=Configure wifi settings
+Exec=alacritty -e impala
+Type=Application
+Icon=network-wireless
+StartupNotify=false

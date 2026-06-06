@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Wiremix
+GenericName=Audio Mixer
+Comment=Configure audio device settings
+Exec=alacritty -e wiremix
+Type=Application
+Icon=multimedia-volume-control
+Keywords=pipewire;sound;audio
+Categories=Utility;Settings;ConsoleOnly
+StartupNotify=false
