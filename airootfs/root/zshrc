@@ -14,3 +14,5 @@ bindkey '^[[B' history-substring-search-down
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
 eval "$(starship init zsh)"
+
+alias hx='helix'

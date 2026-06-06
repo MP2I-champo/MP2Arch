@@ -81,7 +81,7 @@ Scope {
                         }
 
                         Text { 
-                            color: "#89b4fa"; font.family: "JetBrains Mono Nerd Font"; font.bold: true; text: "󰂯 Bluetooth" 
+                            color: "#89b4fa"; font.family: "JetBrains Mono Nerd Font"; font.bold: true; text: "󰂯 Bt" 
                             
                             MouseArea {
                                 anchors.fill: parent
