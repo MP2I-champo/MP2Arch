@@ -53,7 +53,7 @@ Le login manager utilisé ici est `ly`, automatiquement configuré avec une anim
 ### Window manager 
 Packages :
 - `hyprland` -> ce qui gère l'affichage des application et l'écran en général
-- `quickshell` -> ce qui permet d'avoir la barre avec l'heure et des infos système
+- `quickshell` -> ce qui affiche la barre avec les informations sur le haut de l'écran
 - `fuzzel` -> ouvrable avec Super + R (usuellement Super = touche windows) et permet d'ouvrir des applications
 - `wpaperd` -> gère le fond d'écran et le change régulièrement
 - `matugen` -> permet de générer des fichiers de configuration pour les autres packages avec des couleurs adaptées à une image
@@ -62,6 +62,10 @@ Packages :
 ![Window manager](https://github.com/MP2I-champo/MP2Arch/blob/main/doc/wm.png)
 
 ### Shell
+Packages :
+- `zsh-autosuggestions`, `zsh-syntax-highlighting` et `zsh-history-substring-search` -> plugins zsh pour avoir des suggestions, de la coloration et une meilleure recherche dans le terminal
+- `alacritty` -> terminal utilisé
+- `starship` -> gère le prompt avec l'username / le répertoire actuel... (peut aussi afficher des informations liées à git et autres)
 
 ![Shell](https://github.com/MP2I-champo/MP2Arch/blob/main/doc/shell.png)
 
@@ -71,13 +75,18 @@ Packages :
 - `bluetui` -> TUI (Terminal User Interface) permettant de gérer le bluetooth
 
 ### Audio
+Packages :
+- `pipewire`, `pipewire-audio` et `wireplumber` -> permettent de faire fonctionner le son
+- `pipewire-pulse` et `pipewire-jack` -> plugins de pipewire pour permettre la compatibilité avec d'autres protocoles audio
+- `wiremix` -> TUI pour gérer le son
+
 ### Wifi
 Packages :
 - `iwd` et `systemd` (comme expliquer plus haut, permettent l'utilisation du wifi / d'internet en général)
 - `impala` -> TUI permettant de gérer le wifi
 
 ### Explorateur de fichiers
-[Thunar](https://github.com/neilbrown/thunar) est installé par défaut.
+[Thunar](https://github.com/neilbrown/thunar) est installé, il est configurable mais n'est pas configuré par le script.
 
 ### Éditeur de code
 [Helix](https://helix-editor.com/) est installé par le script et automatiquement configuré (voir `~/.config/helix` pour les fichiers de configuration), un shortcut est aussi automatiquement mis en place et permet d'ouvrir `helix` via la commande `hx`.
@@ -85,3 +94,9 @@ Packages :
 Pour installer des lsp (language support protocol) permettant d'avoir des fonctionalités telles que l'autodétection d'erreurs, vous pouvez utiliser `hx --health` et utiliser `paru` pour installer le package correspondant au langage souhaité.
 
 ### Polices d'écriture
+La police `jetbrains-mono-nerd` est utilisée par le terminal, les polices `noto-fonts` et `noto-fonts-emoji` sont là en complément pour supporter un maximum de caractères.
+
+### Autres
+Firefox est installé pour permettre de naviguer sur le web.
+
+L'outil `brightnessctl` est installé pour facilement changer la luminosité.
