@@ -40,6 +40,8 @@ Un thème sera appliqué à GRUB pour le rendre joli, le fichier de configuratio
 ### Login manager
 Le login manager utilisé ici est `ly`, automatiquement configuré avec une animation du [jeu de la vie](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) de John Conway. Il est possible de modifier la configuration de `ly` en éditant le fichier `/etc/ly/config.ini` après installation.
 
+![Login Manager](https://github.com/MP2I-champo/MP2Arch/blob/main/doc/ly.png)
+
 ### Window manager 
 Packages :
 - `hyprland` -> ce qui gère l'affichage des application et l'écran en général
@@ -49,7 +51,12 @@ Packages :
 - `matugen` -> permet de générer des fichiers de configuration pour les autres packages avec des couleurs adaptées à une image
 - utilitaires (voir le script `custom-config`)
 
+![Window manager](https://github.com/MP2I-champo/MP2Arch/blob/main/doc/wm.png)
+
 ### Shell
+
+![Shell](https://github.com/MP2I-champo/MP2Arch/blob/main/doc/shell.png)
+
 ### Bluetooth
 ### Audio
 ### Wifi
