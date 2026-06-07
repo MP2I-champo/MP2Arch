@@ -4,7 +4,7 @@ USER_NAME=$1
 
 echo "Installing some things..."
 pacman -Sy --noconfirm
-pacman -S --noconfirm hyprland hyprshot hyprpolkitagent cage \
+pacman -S --noconfirm hyprland hyprshot hyprpolkitagent \
   xdg-desktop-portal-hyprland xorg-xwayland qt6-wayland qt5-wayland \
   quickshell fuzzel wpaperd matugen starship alacritty fastfetch \
   pipewire wireplumber pipewire-audio pipewire-pulse pipewire-jack wiremix \
