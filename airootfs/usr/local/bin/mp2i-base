@@ -27,7 +27,7 @@ echo "Updating mirror list... (may take time)"
 reflector --country 'France,Germany' --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
 mkdir -p /mnt/etc
-cp /etc/pacman.conf /mnt/etc/pacman.conf
+cp /root/pacman.conf /mnt/etc/pacman.conf
 
 echo "Bootsrapping in newly created env..."
 pacstrap -K /mnt base base-devel linux linux-firmware vim grub efibootmgr iwd sudo zsh git intel-ucode amd-ucode 

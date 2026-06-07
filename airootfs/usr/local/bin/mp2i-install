@@ -94,9 +94,6 @@ cp "$CONFIG_FILE" /mnt/root/mp2i-config.env
 cp /usr/local/bin/mp2i-chroot /mnt/root/mp2i-chroot
 cp /usr/local/bin/custom-config /mnt/root/custom-config
 
-mkdir -p /mnt/usr/share/backgrounds
-cp /root/login-screen.jpg /mnt/usr/share/backgrounds/login-screen.jpg
-
 mkdir -p /mnt/root/wallpapers
 cp -r /root/wallpapers/. /mnt/root/wallpapers/
 

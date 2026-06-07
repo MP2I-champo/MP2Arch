@@ -37,7 +37,7 @@ echo "${TARGET_USERNAME}:${USER_PASSWORD}" | chpasswd
 
 sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
-echo "Initializing network modules (because having internet may be useful (:)..."
+echo "Initializing network modules (because having internet may be useful :)..."
 mkdir -p /etc/systemd/network
 
 cat <<EOF > /etc/systemd/network/20-wire-and-wireless.network
