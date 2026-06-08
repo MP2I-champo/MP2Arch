@@ -82,7 +82,7 @@ Packages :
 
 ### Wifi
 Packages :
-- `iwd` et `systemd` (comme expliquer plus haut, permettent l'utilisation du wifi / d'internet en général)
+- `iwd` et `systemd` (comme expliqué plus haut, permettent l'utilisation du wifi / d'internet en général)
 - `impala` -> TUI permettant de gérer le wifi
 
 ### Explorateur de fichiers
