@@ -59,6 +59,7 @@ Packages :
 - `matugen` -> permet de générer des fichiers de configuration pour les autres packages avec des couleurs adaptées à une image
 - utilitaires (voir le script `custom-config`)
 
+Le dossier où vous pouvez ajouter / enlever des fonds d'écran est `~/wallpapers`. Le fichier de configuation de `wpaperd` est `~/.config/waperd/config.toml`. Pour lui faire changer le thème au changement de fond d'écran il faut décommenter le code dans `~/.config/wpaperd/matugen-hook.sh`.
 ![Window manager](https://github.com/MP2I-champo/MP2Arch/blob/main/doc/wm.png)
 
 ### Shell
