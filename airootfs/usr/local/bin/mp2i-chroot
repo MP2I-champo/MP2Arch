@@ -17,6 +17,7 @@ while true; do
     break
   elif [[ "$FRENCH_KEYBOARD" = "n" ]]; then
     echo "Skipped loading french keyboard."
+    break
   else
     echo "INVALID: invalid, type y or n."
   fi
@@ -67,6 +68,7 @@ while true; do
     break
   elif [[ "$CUSTOM_DE" = "n" ]]; then
     echo "Skipped configuring Desktop Environment."
+    break
   else
     echo "INVALID: invalid, type y or n."
   fi

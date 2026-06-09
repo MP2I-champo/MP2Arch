@@ -60,6 +60,7 @@ Packages :
 - utilitaires (voir le script `custom-config`)
 
 Le dossier où vous pouvez ajouter / enlever des fonds d'écran est `~/wallpapers`. Le fichier de configuation de `wpaperd` est `~/.config/waperd/config.toml`. Pour lui faire changer le thème au changement de fond d'écran il faut décommenter le code dans `~/.config/wpaperd/matugen-hook.sh`.
+
 ![Window manager](https://github.com/MP2I-champo/MP2Arch/blob/main/doc/wm.png)
 
 ### Shell
@@ -96,6 +97,23 @@ Pour installer des lsp (language support protocol) permettant d'avoir des foncti
 
 ### Polices d'écriture
 La police `jetbrains-mono-nerd` est utilisée par le terminal, les polices `noto-fonts` et `noto-fonts-emoji` sont là en complément pour supporter un maximum de caractères.
+
+### Outils de développement pour MP2I
+Si vous avez sélectionné l'installation du Desktop Environment, le script va vous proposer d'installer `clang` (un compilateur C très pratique durant l'année) et `opam`, le package manager des packages `ocaml`, qui vous permettra notamment d'installer `utop`.
+
+`opam` nécessite un peu de configuration :
+- depuis votre terminal une fois l'installation finie (et après reboot...), exécutez `opam init`
+- puis `opam update`
+- enfin, exécutez `opam install utop` pour installer utop
+
+### LaTeX & Typst
+Leur installation est encore une fois proposée si vous avez choisi le Desktop Environment.
+
+LaTeX et Typst sont deux "langages" utilisés pour créer des documents textes. Ils ne sont pas obligatoires non plus et ne vous serviront pas forcément (LibreOffice est une bonne alternative si vous ne voulez pas perdre votre temps...).
+
+LaTeX est le "standard" pour les documents scientifiques et Typst bien que plus jeune se répand.
+
+Pour LaTeX, si sélectionné le script installe TexStudio, un éditeur fait pour LaTeX très pratique.
 
 ### Autres
 Firefox est installé pour permettre de naviguer sur le web.
