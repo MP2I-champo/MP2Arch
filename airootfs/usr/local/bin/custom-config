@@ -164,49 +164,6 @@ chown -R "$USER_NAME":"$USER_NAME" paru
 (cd paru && sudo -u "$USER_NAME" makepkg -si --noconfirm)
 rm -rf paru
 
-while true; do
-  read -r -p "Install essential dev tools for MP2I (C compiler and opam) (y/n): " DEV_TOOLS
-  if [[ "$DEV_TOOLS" = "y" ]]; then
-    pacman -S clang clangd  lldb opam
-    echo "Dev tools installed."
-    break
-  elif [[ "$DEV_TOOLS" = "n" ]]; then
-    echo "Skipped installing dev tools."
-    break
-  else
-    echo "INVALID: invalid, type y or n."
-  fi
-done
-
-
-while true; do
-  read -r -p "Install LaTeX tools (math language to write documents) (y/n): " LATEX_TOOLS
-  if [[ "$LATEX_TOOLS" = "y" ]]; then
-    pacman -S texstudio texlive-basic texlive-latex texlive-latexrecommended texlive-fontsrecommended texlive-mathscience texlive-pictures
-    echo "LaTeX tools installed."
-    break
-  elif [[ "$LATEX_TOOLS" = "n" ]]; then
-    echo "Skipped installing LaTeX tools."
-    break
-  else
-    echo "INVALID: invalid, type y or n."
-  fi
-done
-
-while true; do
-  read -r -p "Install Typst tools (another math language to write documents) (y/n): " LATEX_TOOLS
-  if [[ "$LATEX_TOOLS" = "y" ]]; then
-    pacman -S typst
-    echo "Typst tools installed."
-    break
-  elif [[ "$LATEX_TOOLS" = "n" ]]; then
-    echo "Skipped installing Typst tools."
-    break
-  else
-    echo "INVALID: invalid, type y or n."
-  fi
-done
-
 echo "Moving user config into the right dir..."
 mkdir -p /home/"$USER_NAME"/.config
 cp -r /root/config/. /home/"$USER_NAME"/.config/
@@ -233,3 +190,48 @@ echo "Setting up grub theme..."
 mkdir -p /boot/grub/themes/mp2i
 cp /root/grub-config/grub /etc/default/
 cp -r /root/grub-config/mp2i/. /boot/grub/themes/mp2i/
+
+while true; do
+  read -r -p "Install essential dev tools for MP2I (C compiler and opam) (RECOMMENDED) (y/n): " DEV_TOOLS
+  if [[ "$DEV_TOOLS" = "y" ]]; then
+    pacman -S clang clangd  lldb opam
+    sudo -u "$USER_NAME" opam init -a
+    sudo -u "$USER_NAME" opam install utop ocaml-lsp
+    echo "Dev tools installed."
+    break
+  elif [[ "$DEV_TOOLS" = "n" ]]; then
+    echo "Skipped installing dev tools."
+    break
+  else
+    echo "INVALID: invalid, type y or n."
+  fi
+done
+
+
+while true; do
+  read -r -p "Install LaTeX tools (math language to write documents) (these packages are quite HEAVY, the installation will take some time if you have a bad internet connection) (y/n): " LATEX_TOOLS
+  if [[ "$LATEX_TOOLS" = "y" ]]; then
+    pacman -S texstudio texlive-basic texlive-latex texlive-latexrecommended texlive-fontsrecommended texlive-mathscience texlive-pictures
+    echo "LaTeX tools installed."
+    break
+  elif [[ "$LATEX_TOOLS" = "n" ]]; then
+    echo "Skipped installing LaTeX tools."
+    break
+  else
+    echo "INVALID: invalid, type y or n."
+  fi
+done
+
+while true; do
+  read -r -p "Install Typst tools (another math language to write documents) (y/n): " LATEX_TOOLS
+  if [[ "$LATEX_TOOLS" = "y" ]]; then
+    pacman -S typst
+    echo "Typst tools installed."
+    break
+  elif [[ "$LATEX_TOOLS" = "n" ]]; then
+    echo "Skipped installing Typst tools."
+    break
+  else
+    echo "INVALID: invalid, type y or n."
+  fi
+done
