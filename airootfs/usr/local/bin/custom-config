@@ -11,7 +11,7 @@ pacman -S --noconfirm hyprland hyprshot hyprpolkitagent \
   bluez bluez-utils bluetui impala \
   brightnessctl \
   ly \
-  thunar gvfs \
+  yazi \
   btop \
   firefox helix \
   zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search \
@@ -72,7 +72,7 @@ fg = 0x00FFFFFF
 full_color = true
 
 gameoflife_entropy_interval = 10
-gameoflife_fg = 0x0000FF00
+gameoflife_fg = 0x007DCFFF
 gameoflife_frame_delay = 6
 gameoflife_initial_density = 0.4
 
@@ -194,9 +194,9 @@ cp -r /root/grub-config/mp2i/. /boot/grub/themes/mp2i/
 while true; do
   read -r -p "Install essential dev tools for MP2I (C compiler and opam) (RECOMMENDED) (y/n): " DEV_TOOLS
   if [[ "$DEV_TOOLS" = "y" ]]; then
-    pacman -S clang clangd  lldb opam
-    sudo -u "$USER_NAME" opam init -a
-    sudo -u "$USER_NAME" opam install utop ocaml-lsp
+    pacman -S --noconfirm clang lldb opam rsync
+    sudo -u "$USER_NAME" opam init -a --disable-sandboxing
+    sudo -u "$USER_NAME" opam install utop ocaml-lsp-server --yes
     echo "Dev tools installed."
     break
   elif [[ "$DEV_TOOLS" = "n" ]]; then
@@ -211,7 +211,7 @@ done
 while true; do
   read -r -p "Install LaTeX tools (math language to write documents) (these packages are quite HEAVY, the installation will take some time if you have a bad internet connection) (y/n): " LATEX_TOOLS
   if [[ "$LATEX_TOOLS" = "y" ]]; then
-    pacman -S texstudio texlive-basic texlive-latex texlive-latexrecommended texlive-fontsrecommended texlive-mathscience texlive-pictures
+    pacman -S --noconfirm texstudio texlive-basic texlive-latex texlive-latexrecommended texlive-fontsrecommended texlive-mathscience texlive-pictures
     echo "LaTeX tools installed."
     break
   elif [[ "$LATEX_TOOLS" = "n" ]]; then
@@ -225,7 +225,7 @@ done
 while true; do
   read -r -p "Install Typst tools (another math language to write documents) (y/n): " LATEX_TOOLS
   if [[ "$LATEX_TOOLS" = "y" ]]; then
-    pacman -S typst
+    pacman -S --noconfirm typst
     echo "Typst tools installed."
     break
   elif [[ "$LATEX_TOOLS" = "n" ]]; then
