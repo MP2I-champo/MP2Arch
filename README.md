@@ -4,7 +4,8 @@ Un guide d'installation d'Arch Linux écrit en français est disponible [ici](ht
 
 La commande d'installation automatique procurée par cette ISO est `mp2i-install`, elle vous permettra de choisir des paramètres clés et fera le reste de l'installation pour vous.
 
-Si vous avez fait une installation comprenant le Desktop environment, quelques commandes / concepts de base sont expliqués dans le [HOWTO](https://github.com/MP2I-champo/MP2Arch/blob/main/HOWTO.md) 
+Si vous avez fait une installation comprenant le Desktop environment, quelques commandes / concepts de base sont expliqués dans le [HOWTO](https://github.com/MP2I-champo/MP2Arch/blob/main/HOWTO.md).
+ 
 ## Structure
 - Les fichiers utilisés pour la configuration automatique sont dans `airootfs/root`
 - Les scripts pour l'installation automatique sont eux dans `airootfr/usr/local/bin`
@@ -42,7 +43,7 @@ Commandes courantes :
 - `paru -R <package>` -> désinstalle `<package>`
 
 ### Bootloader
-Un thème sera appliqué à GRUB pour le rendre joli, le fichier de configuration du thème se trouve dans `/boot/grub/themes/mp2i` après installation. Le fond d'écran utilisé par défaut est :
+Un thème sera appliqué à [GRUB](https://wiki.archlinux.org/title/GRUB) pour le rendre joli, le fichier de configuration du thème se trouve dans `/boot/grub/themes/mp2i` après installation. Le fond d'écran utilisé par défaut est :
 
 ![Image par défaut](https://github.com/MP2I-champo/MP2Arch/blob/main/airootfs/root/grub-config/mp2i/background.png)
 
@@ -102,10 +103,7 @@ La police `jetbrains-mono-nerd` est utilisée par le terminal, les polices `noto
 ### Outils de développement pour MP2I
 Si vous avez sélectionné l'installation du Desktop Environment, le script va vous proposer d'installer `clang` (un compilateur C très pratique durant l'année) et `opam`, le package manager des packages `ocaml`, qui vous permettra notamment d'installer `utop`.
 
-`opam` nécessite un peu de configuration :
-- depuis votre terminal une fois l'installation finie (et après reboot...), exécutez `opam init`
-- puis `opam update`
-- enfin, exécutez `opam install utop` pour installer utop
+`opam`, le package manager pour ocaml est automatiquement installé ainsi qu'un lsp pour ocaml et `utop`, très utile en TP d'informatique.
 
 ### LaTeX & Typst
 Leur installation est encore une fois proposée si vous avez choisi le Desktop Environment.

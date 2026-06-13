@@ -1,7 +1,7 @@
 ## Gestion des Packages
-Vous avez donc `paru` installé, c'est un wrapper de `pacman`, le package manager par défaut d'Arch Linux.
+Vous avez donc `paru` installé, c'est un wrapper de `pacman`, le [package manager](https://www.geeksforgeeks.org/linux-unix/understanding-package-managers-and-systemctl/) par défaut d'Arch Linux.
 
-Pour update le système : `paru` suffit, il updatera les repositories, vous proposera de mettre à jour les packages des repos officielles si besoin et ensuite vous proposera pour les packages de L'Arch User Repository (AUR).
+Pour update le système : `paru` suffit, il updatera les repositories, vous proposera de mettre à jour les packages des repos officielles si besoin et ensuite vous proposera pour les packages de L'[Arch User Repository (AUR)](https://foss.wiki/Arch_User_Repository).
 
 Pour installer de nouveaux packages : `paru -S <package>`, il ira voir d'abord dans les repos officielles puis dans l'AUR s'il n'y est pas et vous proposera l'installation.
 
