@@ -88,7 +88,7 @@ Packages :
 - `impala` -> TUI permettant de gérer le wifi
 
 ### Explorateur de fichiers
-[Thunar](https://github.com/neilbrown/thunar) est installé, il est configurable mais n'est pas configuré par le script.
+Yazi est installé, c'est un explorateur de fichiers qui fonctionne dans le terminal (TUI).
 
 ### Éditeur de code
 [Helix](https://helix-editor.com/) est installé par le script et automatiquement configuré (voir `~/.config/helix` pour les fichiers de configuration), un shortcut est aussi automatiquement mis en place et permet d'ouvrir `helix` via la commande `hx`.
