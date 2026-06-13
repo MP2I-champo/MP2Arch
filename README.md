@@ -4,6 +4,7 @@ Un guide d'installation d'Arch Linux écrit en français est disponible [ici](ht
 
 La commande d'installation automatique procurée par cette ISO est `mp2i-install`, elle vous permettra de choisir des paramètres clés et fera le reste de l'installation pour vous.
 
+Si vous avez fait une installation comprenant le Desktop environment, quelques commandes / concepts de base sont expliqués dans le [HOWTO](https://github.com/MP2I-champo/MP2Arch/blob/main/HOWTO.md) 
 ## Structure
 - Les fichiers utilisés pour la configuration automatique sont dans `airootfs/root`
 - Les scripts pour l'installation automatique sont eux dans `airootfr/usr/local/bin`

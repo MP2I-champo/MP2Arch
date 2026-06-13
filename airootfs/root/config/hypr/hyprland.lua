@@ -8,7 +8,7 @@ hl.monitor({
 })
 
 local terminal    = "alacritty"
-local fileManager = "thunar"
+local fileManager = "alacritty -e yazi"
 local menu        = "fuzzel"
 
 hl.on("hyprland.start", function ()
