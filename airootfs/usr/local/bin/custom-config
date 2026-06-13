@@ -5,12 +5,12 @@ USER_NAME=$1
 echo "Installing some things..."
 pacman -Sy --noconfirm
 pacman -S --noconfirm hyprland hyprshot hyprpolkitagent \
-  xdg-desktop-portal-hyprland xorg-xwayland qt6-wayland qt5-wayland \
+  xdg-desktop-portal xdg-desktop-portal-hyprland xorg-xwayland qt6-wayland qt5-wayland \
   quickshell fuzzel wpaperd matugen starship alacritty fastfetch \
   pipewire wireplumber pipewire-audio pipewire-pulse pipewire-jack wiremix \
   bluez bluez-utils bluetui impala \
   brightnessctl \
-  ly \
+  ly reflector\
   yazi \
   btop \
   firefox helix \
@@ -211,7 +211,7 @@ done
 while true; do
   read -r -p "Install LaTeX tools (math language to write documents) (these packages are quite HEAVY, the installation will take some time if you have a bad internet connection) (y/n): " LATEX_TOOLS
   if [[ "$LATEX_TOOLS" = "y" ]]; then
-    pacman -S --noconfirm texstudio texlive-basic texlive-latex texlive-latexrecommended texlive-fontsrecommended texlive-mathscience texlive-pictures
+    pacman -S --noconfirm texstudio texlive-basic texlive-latex texlive-latexrecommended texlive-fontsrecommended texlive-mathscience texlive-pictures texlive-langfrench
     echo "LaTeX tools installed."
     break
   elif [[ "$LATEX_TOOLS" = "n" ]]; then
