@@ -26,7 +26,7 @@ Scope {
 
                 Rectangle {
                     anchors.fill: parent
-                    color: "#2a2a2a"
+                    color: "#e62a2a2a"
                     radius: 12
 
                     RowLayout {
