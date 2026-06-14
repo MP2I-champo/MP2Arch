@@ -106,9 +106,14 @@ hl.config({
 
         sensitivity = 0,
 
+        numlock_by_default = true,
         touchpad = {
             natural_scroll = false,
         },
+    },
+
+    xwayland = {
+        force_zero_scaling = true,
     },
 })
 
