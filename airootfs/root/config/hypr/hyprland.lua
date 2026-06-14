@@ -21,6 +21,7 @@ end)
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("XDG_SESSION_DESKTOP", "Hyprland")
+hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
 
 hl.env("GTK-THEME", "Adwaita-dark")
 hl.env("GDK_BACKEND", "wayland,x11,*")
