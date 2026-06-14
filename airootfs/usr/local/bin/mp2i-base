@@ -30,7 +30,7 @@ mkdir -p /mnt/etc
 cp /root/pacman.conf /mnt/etc/pacman.conf
 
 echo "Bootsrapping in newly created env..."
-pacstrap -K /mnt base base-devel linux linux-firmware vim grub efibootmgr iwd sudo zsh git intel-ucode amd-ucode 
+pacstrap -K /mnt base base-devel linux linux-firmware vim grub efibootmgr iwd sudo zsh git intel-ucode amd-ucode openssh
 
 echo "Creating permanent fstab..."
 genfstab -U /mnt >> /mnt/etc/fstab
