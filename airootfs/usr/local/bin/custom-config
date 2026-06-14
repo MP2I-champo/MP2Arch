@@ -211,7 +211,7 @@ done
 while true; do
   read -r -p "Install LaTeX tools (math language to write documents) (these packages are quite HEAVY, the installation will take some time if you have a bad internet connection) (y/n): " LATEX_TOOLS
   if [[ "$LATEX_TOOLS" = "y" ]]; then
-    pacman -S --noconfirm texstudio texlive-basic texlive-latex texlive-latexrecommended texlive-fontsrecommended texlive-mathscience texlive-pictures texlive-langfrench
+    pacman -S --noconfirm texstudio texlive-basic texlive-latex texlive-latexrecommended texlive-latexextra texlive-fontsrecommended texlive-mathscience texlive-pictures texlive-langfrench
     echo "LaTeX tools installed."
     break
   elif [[ "$LATEX_TOOLS" = "n" ]]; then
