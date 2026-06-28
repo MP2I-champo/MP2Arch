@@ -14,7 +14,7 @@ local menu        = "fuzzel"
 hl.on("hyprland.start", function ()
    hl.exec_cmd("alacritty --hold -e zsh -c 'fastfetch; exec zsh'")
    hl.exec_cmd("hyprpolkitagent")
-   hl.exec_cmd("quickshell")
+   hl.exec_cmd("waybar")
    hl.exec_cmd("wpaperd --daemon")
 end)
 
