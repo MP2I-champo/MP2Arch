@@ -13,6 +13,7 @@ pacman -S --noconfirm hyprland hyprshot hyprpolkitagent \
   ly reflector\
   yazi \
   btop \
+  nftables \
   firefox helix \
   zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search \
   ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji
@@ -152,6 +153,33 @@ xauth_cmd = /usr/bin/xauth
 xinitrc = ~/.xinitrc
 xsessions = /usr/share/xsessions
 EOF
+
+cat << 'EOF' > /etc/nftables.conf
+#!/usr/bin/nft -f
+
+flush ruleset
+
+table inet filter {
+    chain input {
+        type filter hook input priority filter; policy drop;
+
+        iif "lo" accept
+
+        ct state established,related accept
+    }
+
+    chain forward {
+        type filter hook forward priority filter; policy drop;
+    }
+
+    chain output {
+        type filter hook output priority filter; policy accept;
+    }
+}
+EOF
+
+nft -f /etc/nftables.conf
+systemctl enable nftables.service
 
 systemctl disable getty@tty2.service
 systemctl enable ly@tty2.service
