@@ -55,9 +55,9 @@ Le login manager utilisé ici est `ly`, automatiquement configuré avec une anim
 ### Window manager 
 Packages :
 - `hyprland` -> ce qui gère l'affichage des application et l'écran en général
-- `quickshell` -> ce qui affiche la barre avec les informations sur le haut de l'écran
+- `waybar` -> ce qui affiche la barre avec les informations sur le haut de l'écran
 - `fuzzel` -> ouvrable avec Super + R (usuellement Super = touche windows) et permet d'ouvrir des applications
-- `wpaperd` -> gère le fond d'écran et le change régulièrement
+- `swaybg` -> affiche le fond d'écran, il est changé régulièrement par le script `/usr/local/bin/random_wallpaper`
 - `matugen` -> permet de générer des fichiers de configuration pour les autres packages avec des couleurs adaptées à une image
 - utilitaires (voir le script `custom-config`)
 
@@ -98,7 +98,7 @@ Yazi est installé, c'est un explorateur de fichiers qui fonctionne dans le term
 Pour installer des lsp (language support protocol) permettant d'avoir des fonctionalités telles que l'autodétection d'erreurs, vous pouvez utiliser `hx --health` et utiliser `paru` pour installer le package correspondant au langage souhaité.
 
 ### Polices d'écriture
-La police `jetbrains-mono-nerd` est utilisée par le terminal, les polices `noto-fonts` et `noto-fonts-emoji` sont là en complément pour supporter un maximum de caractères.
+La police `jetbrains-mono-nerd` est utilisée par le terminal, les polices `noto-fonts` et `noto-fonts-emoji` sont là en complément pour supporter un maximum de caractères. `noto-fonts-cjk` vient rajouter le support du Coréen / Japonais / Chinois.
 
 ### Outils de développement pour MP2I
 Si vous avez sélectionné l'installation du Desktop Environment, le script va vous proposer d'installer `clang` (un compilateur C très pratique durant l'année) et `opam`, le package manager des packages `ocaml`, qui vous permettra notamment d'installer `utop`.
