@@ -4,19 +4,17 @@ USER_NAME=$1
 
 echo "Installing some things..."
 pacman -Sy --noconfirm
-pacman -S --noconfirm hyprland hyprshot hyprpolkitagent \
+pacman -S --noconfirm hyprland hyprshot hyprpolkitagent swaybg \
   xdg-desktop-portal xdg-desktop-portal-hyprland xorg-xwayland qt6-wayland qt5-wayland \
-  waybar fuzzel wpaperd matugen starship alacritty fastfetch \
-  pipewire wireplumber pipewire-audio pipewire-pulse pipewire-jack wiremix \
-  bluez bluez-utils bluetui impala \
-  brightnessctl \
-  ly reflector\
-  yazi \
-  btop \
-  nftables \
-  firefox helix \
   zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search \
-  ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji
+  pipewire wireplumber pipewire-audio pipewire-pulse pipewire-jack wiremix \
+  ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji noto-fonts-cjk \
+  bluez bluez-utils bluetui impala \
+  brightnessctl reflector nftables \
+  starship alacritty fastfetch \
+  yazi helix firefox btop \
+  waybar fuzzel matugen \
+  ly 
 
 echo "Setting up ly"
 mkdir -p /etc/ly
@@ -178,6 +176,13 @@ table inet filter {
 }
 EOF
 
+mkdir -p /etc/systemd/journald.conf.d
+cat << 'EOF' > /etc/systemd/journald.conf.d/00-mem-cap.conf
+[Journal]
+SystemMaxUse=50M
+RuntimeMaxUse=16M
+EOF
+
 nft -f /etc/nftables.conf
 systemctl enable nftables.service
 
@@ -200,6 +205,10 @@ mkdir -p /home/"$USER_NAME"/.local
 cp -r /root/local/. /home/"$USER_NAME"/.local/
 
 cp /root/zshrc /home/"$USER_NAME"/.zshrc
+
+mkdir -p /usr/local/bin
+cp /root/random_wallpaper /usr/local/bin/
+chmod +x /usr/local/bin/random_wallpaper
 
 mkdir -p /home/"$USER_NAME"/wallpapers
 cp -r /root/wallpapers/. /home/"$USER_NAME"/wallpapers/

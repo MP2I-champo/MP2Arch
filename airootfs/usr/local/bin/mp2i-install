@@ -107,6 +107,7 @@ mkdir -p /mnt/root/grub-config
 cp -r /root/grub-config/. /mnt/root/grub-config/
 
 cp /root/zshrc /mnt/root/
+cp /root/random_wallpaper /mnt/root/
 
 chmod +x /mnt/root/mp2i-chroot
 chmod +x /mnt/root/custom-config

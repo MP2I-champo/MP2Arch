@@ -15,7 +15,7 @@ hl.on("hyprland.start", function ()
    hl.exec_cmd("alacritty --hold -e zsh -c 'fastfetch; exec zsh'")
    hl.exec_cmd("hyprpolkitagent")
    hl.exec_cmd("waybar")
-   hl.exec_cmd("wpaperd --daemon")
+   hl.exec_cmd("random_wallpaper")
 end)
 
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")

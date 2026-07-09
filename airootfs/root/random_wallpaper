@@ -1,0 +1,15 @@
+#!/bin/bash
+
+WALLPAPERS_DIR="$HOME/wallpapers"
+
+while :
+do
+  files=("$WALLPAPERS_DIR"/*)
+  NEW_WALLPAPER=$(printf "%s\n" "${files[@]}" | shuf -n 1)
+
+  pkill swaybg
+  sleep 0.5
+  swaybg -i "$NEW_WALLPAPER" -m fill &
+    
+  sleep 600
+done
