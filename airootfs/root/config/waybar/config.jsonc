@@ -41,7 +41,6 @@
         "persistent-workspaces": {
             "*": 5
         },
-        "disable-scroll": true
     },
 
     "clock": {
@@ -72,8 +71,11 @@
     },
 
     "battery": {
-        "interval": 2,
-        "format": "  {capacity}%",
+        "interval": 20,
+        "format": "{icon} {capacity}%",
+        "format-charging": "{icon} {capacity}% ",
+        "format-plugged": "{icon} {capacity}% ",
+        "format-icons": ["","","","" ,""],
         "tooltip": false
     }
 }
