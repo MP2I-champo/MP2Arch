@@ -13,7 +13,7 @@ pacman -S --noconfirm hyprland hyprshot hyprpolkitagent swaybg \
   bluez bluez-utils bluetui impala \
   brightnessctl reflector nftables \
   starship alacritty fastfetch \
-  yazi helix zathura firefox btop \
+  yazi helix zathura zathura-pdf-mupdf firefox btop \
   waybar fuzzel matugen \
   ly 
 
