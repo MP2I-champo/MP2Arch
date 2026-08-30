@@ -112,7 +112,7 @@ LaTeX et Typst sont deux "langages" utilisés pour créer des documents textes. 
 
 LaTeX est le "standard" pour les documents scientifiques et Typst bien que plus jeune se répand.
 
-Pour LaTeX, si sélectionné le script installe TexStudio, un éditeur fait pour LaTeX très pratique.
+Pour LaTeX, si sélectionné, le script installe un LSP (Texlab) et tous les packages du groupe [texlive](https://archlinux.org/groups/x86_64/texlive/). L'édition du LaTeX se fait facilement avec Helix qui compile et ouvre le fichier compilé avec zathura quand on sauvegarde (`:w`).
 
 ### Autres
 Firefox est installé pour permettre de naviguer sur le web.
