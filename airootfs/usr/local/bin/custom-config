@@ -11,7 +11,7 @@ pacman -S --noconfirm hyprland hyprshot hyprpolkitagent swaybg \
   pipewire wireplumber pipewire-audio pipewire-pulse pipewire-jack wiremix \
   ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji noto-fonts-cjk \
   bluez bluez-utils bluetui impala \
-  brightnessctl reflector nftables \
+  brightnessctl reflector nftables wget \
   starship alacritty fastfetch \
   yazi helix zathura zathura-pdf-mupdf firefox btop \
   waybar fuzzel matugen \
@@ -265,6 +265,20 @@ while true; do
     break
   elif [[ "$LATEX_TOOLS" = "n" ]]; then
     echo "Skipped installing Typst tools."
+    break
+  else
+    echo "INVALID: invalid, type y or n."
+  fi
+done
+
+while true; do
+  read -r -p "Install vlc (media player) (y/n): " VLC
+  if [[ "$VLC" = "y" ]]; then
+    pacman -S --noconfirm vlc
+    echo "vlc installed."
+    break
+  elif [[ "$VLC" = "n" ]]; then
+    echo "Skipped installing vlc."
     break
   else
     echo "INVALID: invalid, type y or n."
