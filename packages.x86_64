@@ -6,7 +6,6 @@ base
 bind
 bolt
 brltty
-broadcom-wl
 btrfs-progs
 cryptsetup
 darkhttpd
